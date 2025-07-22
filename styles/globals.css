@@ -1,14 +1,6 @@
 @import "tailwindcss";
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
+/* Variáveis CSS definidas no :root e modo dark com @layer base */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -45,6 +37,7 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -79,13 +72,24 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  /* Aplica borda padrão em tudo - IMPORTANTE: Especificar cor da borda explicitamente no v4 */
+  *,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: hsl(var(--border));
   }
+
+  /* Estilos base do body */
   body {
     @apply bg-background text-foreground;
+    font-family: Arial, Helvetica, sans-serif;
   }
+}
+
+/* Utilitário customizado - MUDANÇA IMPORTANTE: usar @utility ao invés de @layer utilities */
+@utility text-balance {
+  text-wrap: balance;
 }
