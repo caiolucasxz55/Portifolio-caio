@@ -39,7 +39,7 @@ const skillCategories = [
 ]
 
 const learningItems = [
-  "Machine Learning",
+  "DevOps",
   "Inteligência Artificial",
   "Automação",
   "BlockChain",
