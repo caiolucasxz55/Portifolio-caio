@@ -10,7 +10,7 @@ export default function HeroSection() {
       {/* Avatar */}
       <div className="mb-8">
         <img
-          src="/download (4).jpg?height=200&width=200"
+          src="/tentar.jpeg?height=400&width=400"
           alt="Caio Lucas Silva Gomes"
           className="w-40 h-40 rounded-full mx-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
         />

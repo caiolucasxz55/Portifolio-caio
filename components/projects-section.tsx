@@ -21,10 +21,10 @@ const projects = [
     title: "Smart Guide – Planejador de Rotas do Metrô de São Paulo",
     description:
       "Smart Guide é uma aplicação web interativa que facilita o planejamento de rotas no sistema metroviário de São Paulo. Com foco em acessibilidade e usabilidade, a plataforma permite que os usuários visualizem estações, calculem rotas eficientes, salvem trajetos favoritos e consultem informações detalhadas de cada estação.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/Smartguide-def.png?height=400&width=600",
     technologies: ["Python", "java", "React", "node.js", "OracleSQL"],
     githubUrl: "https://github.com/challengeFiap-tds/challenge-ccr-definitivo",
-    liveUrl: "https://analytics-demo.netlify.app",
+    liveUrl: "https://challenge-ccr-definitivo.vercel.app/",
     features: [
       "Este projeto foi desenvolvido como parte das atividades acadêmicas da FIAP em parceria com a CCR, com o objetivo de demonstrar habilidades em desenvolvimento web e UX focado em mobilidade urbana.",
     ],
@@ -33,10 +33,10 @@ const projects = [
     title: "Solar Pride",
     description:
       "O SolarPride é uma plataforma digital projetada para democratizar o uso de energia solar. Com um dashboard interativo, suporte via chatbot e parcerias estratégicas, o SolarPride oferece uma solução completa para quem deseja adotar a energia solar de forma acessível e sustentável.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/SolarPride.png?height=400&width=600",
     technologies: ["JavaScript","java" , "Python", "Html & css"],
     githubUrl: "https://github.com/SolarPrideGlobal/GlobalSolutions",
-    liveUrl: "https://tasks-demo.render.com",
+    liveUrl: "https://github.com/SolarPrideGlobal/GlobalSolutions",
     features: [
       "Simulações realistas de economia e impacto ambiental.",
       "Gráficos intuitivos que mostram a contribuição sustentável do usuário.",
