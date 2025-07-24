@@ -1,11 +1,11 @@
 import type React from "react"
-import type { Metadata, Viewport } from "next" // Adicionei Viewport ao import
+import type { Metadata, Viewport } from "next" 
 import { Inter } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
-// 1. METADADOS (separado do viewport)
+
 export const metadata: Metadata = {
   title: "Caio Lucas Silva Gomes - Desenvolvedor Full Stack",
   description:
@@ -22,14 +22,12 @@ export const metadata: Metadata = {
   },
 }
 
-// 2. CONFIGURAÇÃO DO VIEWPORT (nova exportação separada)
-export const viewport: Viewport = {
+
+export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  userScalable: false,
-  // themeColor: '#000000', // Opcional: descomente e defina sua cor
-  viewportFit: 'cover', // Importante para dispositivos com notch
+  viewportFit: 'cover'
 }
 
 export default function RootLayout({
@@ -39,7 +37,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" className="scroll-smooth">
-      {/* 3. CORPO COM CONFIGURAÇÕES MOBILE-FIRST */}
       <body className={`${inter.className} antialiased touch-pan-y`}>
         {children}
       </body>
