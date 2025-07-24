@@ -6,18 +6,22 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Caio Lucas Silva Gomes - Full Stack Developer",
+  title: "Caio Lucas Silva Gomes - Desenvolvedor Full Stack",
   description:
-    "Full Stack Developer specialized in Python, Java, and TypeScript. Passionate about machine learning, AI, and high-performance applications.",
-  keywords: "Full Stack Developer, Python, Java, TypeScript, React, Node.js, Machine Learning, AI",
+    "Desenvolvedor Full Stack especializado em Python, Java e TypeScript. Apaixonado por machine learning, inteligência artificial e aplicações de alta performance.",
+  keywords:
+    "Desenvolvedor Full Stack, Python, Java, TypeScript, React, Node.js, Machine Learning, Inteligência Artificial",
   authors: [{ name: "Caio Lucas Silva Gomes" }],
+  generator: "v0.dev",
+  viewport: "width=device-width, initial-scale=1.0",
   openGraph: {
-    title: "Caio Lucas Silva Gomes - Full Stack Developer",
-    description: "Full Stack Developer specialized in Python, Java, and TypeScript",
+    title: "Caio Lucas Silva Gomes - Desenvolvedor Full Stack",
+    description:
+      "Desenvolvedor Full Stack especializado em Python, Java e TypeScript",
     type: "website",
   },
-    generator: 'v0.dev'
 }
+
 export default function RootLayout({
   children,
 }: {
@@ -25,11 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" className="scroll-smooth">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   )
 }

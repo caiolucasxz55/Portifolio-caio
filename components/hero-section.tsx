@@ -65,11 +65,11 @@ export default function HeroSection() {
         }`}>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-4">
             Full Stack Developer especializado em:{" "}
-            <span className="font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200 cursor-pointer touch-manipulation">
+            <span className="font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200  touch-manipulation">
               Python, Java, and TypeScript
             </span>
             . Ao longo da minha jornada acadêmica, contribuí para projetos inovadores aplicando tecnologia para resolver desafios do mundo real. Tenho experiência prática com Flask, Django, Node.js e bancos de dados SQL, sempre buscando construir soluções eficientes, escaláveis e acessíveis. Sou apaixonado por{" "}
-            <span className="font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200 cursor-pointer touch-manipulation">
+            <span className="font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200 touch-manipulation">
               machine learning, inteligência artificial
             </span>
             , e aplicações de alta performance que causam impacto real.
