@@ -1,60 +1,54 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Mail, Linkedin, Download, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Mail, Linkedin, Download, Send } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
+    e.preventDefault();
+    setIsSubmitting(true);
+
     try {
-      // Aqui você pode integrar com seu serviço de email (EmailJS, Resend, etc.)
-      console.log("Form submitted:", formData)
-      
-      // Simular envio
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      setFormData({ name: "", email: "", message: "" })
-      alert("Mensagem enviada com sucesso!")
+      console.log("Form submitted:", formData);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setFormData({ name: "", email: "", message: "" });
+      alert("Mensagem enviada com sucesso!");
     } catch (error) {
-      console.error("Erro ao enviar:", error)
-      alert("Erro ao enviar mensagem. Tente novamente.")
+      console.error("Erro ao enviar:", error);
+      alert("Erro ao enviar mensagem. Tente novamente.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleDownloadCV = () => {
-    if (typeof window !== 'undefined') {
-      // Substitua pelo caminho do seu CV
-      const link = document.createElement('a')
-      link.href = '/cv-caio-lucas.pdf' // Coloque seu CV na pasta public
-      link.download = 'CV-Caio-Lucas.pdf'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+    if (typeof window !== "undefined") {
+      const link = document.createElement("a");
+      link.href = "/Caio lucas - definitivo.pdf"; // Arquivo na pasta /public
+      link.download = "CV-Caio-Lucas.pdf"; // Nome ao baixar
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
-  }
+  };
 
   return (
     <section id="contact" className="py-12 sm:py-16 md:py-20 bg-white">
@@ -69,7 +63,7 @@ export default function ContactSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Contact Info */}
+          {/* Contatos */}
           <div className="space-y-6 sm:space-y-8">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6">
@@ -112,7 +106,7 @@ export default function ContactSection() {
                 </div>
               </a>
 
-              <button 
+              <button
                 onClick={handleDownloadCV}
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl hover:bg-gray-50 transition-colors duration-200 w-full text-left cursor-pointer group"
                 aria-label="Baixar currículo"
@@ -128,7 +122,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Formulário */}
           <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
               Me mande uma mensagem
@@ -138,47 +132,38 @@ export default function ContactSection() {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-              <div>
-                <Input
-                  name="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Seu nome"
-                  className="bg-white border-gray-200 rounded-xl h-10 sm:h-11 text-sm sm:text-base"
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <Input
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="seu@email.com"
-                  className="bg-white border-gray-200 rounded-xl h-10 sm:h-11 text-sm sm:text-base"
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <Textarea
-                  name="message"
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Me fale sobre o assunto ou simplesmente diga olá..."
-                  rows={4}
-                  className="bg-white border-gray-200 rounded-xl resize-none text-sm sm:text-base min-h-[100px] sm:min-h-[120px]"
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <Button 
-                type="submit" 
+              <Input
+                name="name"
+                type="text"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Seu nome"
+                className="bg-white border-gray-200 rounded-xl h-10 sm:h-11 text-sm sm:text-base"
+                disabled={isSubmitting}
+              />
+              <Input
+                name="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="seu@email.com"
+                className="bg-white border-gray-200 rounded-xl h-10 sm:h-11 text-sm sm:text-base"
+                disabled={isSubmitting}
+              />
+              <Textarea
+                name="message"
+                required
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Me fale sobre o assunto ou simplesmente diga olá..."
+                rows={4}
+                className="bg-white border-gray-200 rounded-xl resize-none text-sm sm:text-base min-h-[100px] sm:min-h-[120px]"
+                disabled={isSubmitting}
+              />
+              <Button
+                type="submit"
                 className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white rounded-xl py-2 sm:py-3 text-sm sm:text-base font-medium transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
                 disabled={isSubmitting}
               >
@@ -199,5 +184,5 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
