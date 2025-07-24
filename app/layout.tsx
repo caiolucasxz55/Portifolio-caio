@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   keywords:
     "Desenvolvedor Full Stack, Python, Java, TypeScript, React, Node.js, Machine Learning, Inteligência Artificial",
   authors: [{ name: "Caio Lucas Silva Gomes" }],
-  generator: "v0.dev",
-  viewport: "width=device-width, initial-scale=1.0",
   openGraph: {
     title: "Caio Lucas Silva Gomes - Desenvolvedor Full Stack",
     description:
@@ -29,6 +27,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" className="scroll-smooth">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body className={inter.className}>
         {children}
       </body>
