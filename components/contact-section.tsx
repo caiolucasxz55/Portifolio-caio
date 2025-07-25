@@ -42,8 +42,8 @@ export default function ContactSection() {
   const handleDownloadCV = () => {
     if (typeof window !== "undefined") {
       const link = document.createElement("a");
-      link.href = "/Caio lucas - definitivo.pdf"; // Arquivo na pasta /public
-      link.download = "CV-Caio-Lucas.pdf"; // Nome ao baixar
+      link.href = "/CaioLucas-definitivo.pdf"; 
+      link.download = "CV-Caio-Lucas.pdf"; 
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
