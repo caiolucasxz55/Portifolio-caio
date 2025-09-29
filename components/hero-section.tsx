@@ -63,11 +63,11 @@ export default function HeroSection() {
             <span className="font-medium text-foreground hover:text-primary transition-colors duration-200">
               Python, Java e TypeScript
             </span>
-            . Ao longo da minha jornada acadêmica, contribuí para projetos inovadores aplicando tecnologia para resolver desafios do mundo real. Tenho experiência prática com Flask, Django, Node.js e bancos de dados SQL, sempre buscando construir soluções eficientes, escaláveis e acessíveis. Sou apaixonado por{" "}
+            . Ao longo da minha jornada acadêmica, contribuí para projetos inovadores aplicando tecnologia para resolver desafios do mundo real. Tenho experiência prática com Flask, Node.js, vivência em desenvolvimento e consumo de APIs Rest e bancos de dados SQL, sempre buscando construir soluções eficientes, escaláveis e acessíveis. Sou apaixonado por{" "}
             <span className="font-medium text-foreground hover:text-primary transition-colors duration-200">
-              machine learning e inteligência artificial
+              machine learning e inteligência artificial.
             </span>
-            , desenvolvendo aplicações de alta performance que causam impacto real.
+            Sempre desenvolvendo aplicações de alta performance que causam impacto real.
           </p>
         </div>
 

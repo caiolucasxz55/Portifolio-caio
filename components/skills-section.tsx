@@ -59,7 +59,7 @@ const skillCategories = [
   {
     title: "Backend",
     icon: <Server className="size-5 sm:size-6" />,
-    skills: ["Python", "Node.js", "Django", "Java", "Flask"],
+    skills: ["Python", "Node.js", "Java", "Flask"],
     color: "bg-green-500",
     hoverColor: "hover:bg-green-600",
     shadowColor: "hover:shadow-green-500/20",
@@ -68,7 +68,7 @@ const skillCategories = [
   {
     title: "Databases",
     icon: <Database className="size-5 sm:size-6" />,
-    skills: ["MongoDB", "MySQL", "PostgreSQL", "OracleSQL"],
+    skills: ["MongoDB", "MySQL", "PostgresSQL", "OracleSQL"],
     color: "bg-purple-500",
     hoverColor: "hover:bg-purple-600",
     shadowColor: "hover:shadow-purple-500/20",
@@ -77,7 +77,7 @@ const skillCategories = [
   {
     title: "Ferramentas",
     icon: <Wrench className="size-5 sm:size-6" />,
-    skills: ["Git", "Docker", "REST APIs", "AWS", "N8N"],
+    skills: ["Git", "Docker", "REST APIs", "AWS", "N8N", "Azure"],
     color: "bg-orange-500",
     hoverColor: "hover:bg-orange-600",
     shadowColor: "hover:shadow-orange-500/20",
