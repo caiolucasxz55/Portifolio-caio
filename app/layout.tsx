@@ -1,48 +1,64 @@
 import type React from "react"
-import type { Metadata, Viewport } from "next" 
-import { Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Outfit, JetBrains_Mono } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-const inter = Inter({ 
+const outfit = Outfit({
   subsets: ["latin"],
-  display: 'swap', // Melhora o FOUT (Flash of Unstyled Text)
-  adjustFontFallback: false // Otimização para Next.js
+  display: "swap",
+  variable: "--font-outfit",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
+  variable: "--font-jet",
 })
 
 export const metadata: Metadata = {
   title: {
-    default: "Caio Lucas Silva Gomes - Desenvolvedor Full Stack",
-    template: "%s | Caio Lucas"
+    default: "Caio Lucas Silva Gomes — Desenvolvedor Full Stack",
+    template: "%s | Caio Lucas",
   },
-  description: "Desenvolvedor Full Stack especializado em Python, Java e TypeScript. Apaixonado por machine learning, inteligência artificial e aplicações de alta performance.",
+  description:
+    "Desenvolvedor Full Stack com experiência em Python, FastAPI, Next.js, TypeScript e React. Integração de soluções de IA e Machine Learning, CI/CD e Cloud Computing.",
   keywords: [
-    "Desenvolvedor Full Stack", 
-    "Python", 
-    "Java", 
-    "TypeScript", 
-    "React", 
-    "Node.js", 
-    "Machine Learning", 
-    "Inteligência Artificial"
+    "Desenvolvedor Full Stack",
+    "Python",
+    "FastAPI",
+    "Next.js",
+    "TypeScript",
+    "React",
+    "Machine Learning",
+    "RAG",
+    "Azure",
+    "CI/CD",
   ],
   authors: [{ name: "Caio Lucas Silva Gomes", url: "https://github.com/caiolucasxz55" }],
-  metadataBase: new URL('https://seusite.com'), 
-  alternates: {
-    canonical: '/',
+  creator: "Caio Lucas Silva Gomes",
+  metadataBase: new URL("https://seusite.com"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "/",
+    siteName: "Caio Lucas Silva Gomes",
+    title: "Caio Lucas Silva Gomes — Desenvolvedor Full Stack",
+    description:
+      "Construo soluções web modernas e escaláveis, unindo boas práticas de engenharia, foco no usuário e aprendizado contínuo.",
   },
 }
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false, 
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#111827' }
+    { media: "(prefers-color-scheme: light)", color: "#f3f4ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#121716" },
   ],
-  colorScheme: 'light dark',
-  interactiveWidget: 'resizes-content'
+  colorScheme: "light dark",
 }
 
 export default function RootLayout({
@@ -51,9 +67,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-br" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased touch-pan-y selection:bg-gray-900 selection:text-white dark:selection:bg-gray-100 dark:selection:text-gray-900`}>
-        {children}
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={`${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

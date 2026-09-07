@@ -1,109 +1,125 @@
 "use client"
 
 import { ArrowUp, Github, Linkedin, Mail } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+
+const socials = [
+  { name: "GitHub", url: "https://github.com/caiolucasxz55", icon: Github },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/caio-lucas-a892b4324", icon: Linkedin },
+  { name: "Email", url: "mailto:caiolucasxzred@gmail.com", icon: Mail },
+]
+
+const navLinks = [
+  { name: "Início", id: "home" },
+  { name: "Experiência", id: "experience" },
+  { name: "Skills", id: "skills" },
+  { name: "Projetos", id: "projects" },
+  { name: "Contato", id: "contact" },
+]
 
 export default function Footer() {
-  const [showScrollButton, setShowScrollButton] = useState(false)
+  const [showTop, setShowTop] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollButton(window.scrollY > 300)
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll)
-      return () => window.removeEventListener('scroll', handleScroll)
-    }
+    const onScroll = () => setShowTop(window.scrollY > 400)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
-
-  const scrollToTop = () => {
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-  }
-
-  const socialLinks = [
-    {
-      name: "GitHub",
-      url: "https://github.com/caiolucasxz55",
-      icon: Github,
-      label: "Ver perfil no GitHub"
-    },
-    {
-      name: "LinkedIn", 
-      url: "https://www.linkedin.com/in/caio-lucas-a892b4324",
-      icon: Linkedin,
-      label: "Conectar no LinkedIn"
-    },
-    {
-      name: "Email",
-      url: "mailto:caiolucasxzred@gmail.com",
-      icon: Mail,
-      label: "Enviar email"
-    }
-  ]
 
   return (
     <>
-      <footer className="bg-gray-50 py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center">
-            {/* Main Footer Content */}
-            <div className="mb-6 sm:mb-8">
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-                Caio Lucas Silva Gomes
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6 px-2 sm:px-0 leading-relaxed">
-                Desenvolvedor Full Stack apaixonado por criar soluções impactantes
+      <footer className="border-t border-border px-5 py-12 sm:px-8 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid gap-10 md:grid-cols-[1.7fr_1fr_1fr]">
+            {/* Marca */}
+            <div className="max-w-sm">
+              <div className="flex items-center gap-3.5">
+                <span className="text-2xl font-bold tracking-tight text-foreground">CL</span>
+                <span aria-hidden="true" className="h-6 w-px bg-border" />
+                <span className="text-[15px] font-medium text-foreground">
+                  Caio Lucas Silva Gomes
+                </span>
+              </div>
+              <p className="mt-4 text-[14.5px] leading-[1.7] text-muted-foreground text-pretty">
+                Desenvolvedor Full Stack construindo soluções web modernas e escaláveis, do backend
+                à interface.
               </p>
+            </div>
 
-              {/* Social Links */}
-              <div className="flex justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
-                {socialLinks.map((social) => {
-                  const IconComponent = social.icon
-                  return (
+            {/* Navegação */}
+            <nav aria-label="Rodapé">
+              <h2 className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                Navegação
+              </h2>
+              <ul className="mt-4 space-y-2.5">
+                {navLinks.map((link) => (
+                  <li key={link.id}>
                     <a
-                      key={social.name}
-                      href={social.url}
-                      target={social.name !== "Email" ? "_blank" : undefined}
-                      rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
-                      className="p-2 sm:p-3 text-gray-400 hover:text-gray-900 bg-white hover:bg-gray-100 rounded-full transition-all duration-200 transform hover:scale-110 shadow-sm hover:shadow-md"
-                      aria-label={social.label}
+                      href={`#${link.id}`}
+                      className="text-[14.5px] text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
+                      {link.name}
                     </a>
-                  )
-                })}
-              </div>
-            </div>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-            {/* Footer Bottom */}
-            <div className="border-t border-gray-200 pt-4 sm:pt-6">
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 text-gray-500 text-xs sm:text-sm">
-                <p>
-                  © {new Date().getFullYear()} Caio Lucas Silva Gomes.
-                </p>
-                <span className="hidden sm:inline">•</span>
-                <p>
-                  Todos os direitos reservados.
-                </p>
+            {/* Contato */}
+            <div>
+              <h2 className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                Onde me achar
+              </h2>
+              <div className="mt-4 flex items-center gap-2.5">
+                {socials.map(({ name, url, icon: Icon }) => (
+                  <a
+                    key={name}
+                    href={url}
+                    target={name !== "Email" ? "_blank" : undefined}
+                    rel={name !== "Email" ? "noopener noreferrer" : undefined}
+                    className="grid size-10 place-items-center rounded-full border border-border text-muted-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label={name}
+                    title={name}
+                  >
+                    <Icon className="size-[18px]" strokeWidth={1.75} />
+                  </a>
+                ))}
               </div>
+              <a
+                href="/CaioLucas-definitivo.pdf"
+                download="CV-Caio-Lucas.pdf"
+                className="mt-4 inline-block text-[14.5px] font-medium text-primary underline-offset-4 hover:underline"
+              >
+                Baixar currículo
+              </a>
             </div>
+          </div>
+
+          <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 sm:flex-row">
+            <p className="font-mono text-[11px] tracking-[0.1em] text-muted-foreground uppercase">
+              © {new Date().getFullYear()} Caio Lucas Silva Gomes
+            </p>
+            <p className="font-mono text-[11px] tracking-[0.1em] text-muted-foreground/70 uppercase">
+              Código <span className="mx-1.5">•</span> Ideias <span className="mx-1.5">•</span>{" "}
+              Resultados
+            </p>
           </div>
         </div>
       </footer>
 
-      {/* Scroll to top button */}
-      {showScrollButton && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 w-10 h-10 sm:w-12 sm:h-12 bg-gray-900 hover:bg-gray-800 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 z-40 transform hover:scale-110 active:scale-95"
-          aria-label="Voltar ao topo"
-        >
-          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
-      )}
+      {/* Voltar ao topo */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className={`fixed right-5 bottom-5 z-40 grid size-11 place-items-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background sm:right-8 sm:bottom-8 ${
+          showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+        }`}
+        aria-label="Voltar ao topo"
+        aria-hidden={!showTop}
+        tabIndex={showTop ? 0 : -1}
+      >
+        <ArrowUp className="size-5" strokeWidth={1.75} />
+      </button>
     </>
   )
 }
