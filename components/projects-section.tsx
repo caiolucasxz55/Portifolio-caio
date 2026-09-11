@@ -2,17 +2,22 @@
 
 import {
   ArrowUpRight,
-  BarChart3,
+  Bot,
   Cloud,
-  Database,
   ExternalLink,
   Github,
-  Globe,
+  Landmark,
   Leaf,
-  Smartphone,
+  Lock,
+  Plug,
+  Store,
   type LucideIcon,
 } from "lucide-react"
 import Image from "next/image"
+import type { IconType } from "react-icons"
+import { GrOracle } from "react-icons/gr"
+import { VscAzure } from "react-icons/vsc"
+import { LuBriefcaseBusiness, LuClock } from "react-icons/lu"
 import { useState, type ReactNode } from "react"
 import Reveal from "@/components/reveal"
 import SectionHeader from "@/components/section-header"
@@ -34,51 +39,83 @@ type Project = {
   image?: string
   liveUrl?: string
   githubUrl?: string
+  /** Repositório privado: mostra "Código privado" no lugar do link. */
+  privateRepo?: boolean
+  /** Projeto ainda não lançado: esconde os links e mostra o status. */
+  comingSoon?: boolean
+  /** Selo de destaque sobre a capa, ex.: parceria com uma empresa. */
+  badge?: { label: string; icon?: IconType; iconColor?: string }
 }
 
-const placeholder = {
-  title: "Nome do Projeto",
-  description:
-    "Breve descrição do projeto, explicando o problema que resolve e quais tecnologias foram utilizadas.",
-}
-
-// White label: troque pelos projetos reais. `image`, `liveUrl` e `githubUrl` são opcionais.
+// `image`, `liveUrl`, `githubUrl`, `privateRepo`, `comingSoon` e `badge` são opcionais.
 const projects: Project[] = [
   {
-    ...placeholder,
+    title: "ResinArts",
+    description:
+      "SaaS em produção para artesãs, com gestão financeira, pedidos, loja pública e assinaturas pagas.",
     category: "Web",
-    icon: Globe,
-    technologies: ["Next.js", "TypeScript", "Tailwind", "PostgreSQL"],
+    icon: Store,
+    technologies: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Mercado Pago", "Docker"],
+    liveUrl: "https://resinarts-definitivo.vercel.app",
+    privateRepo: true,
+    image: "/projects/resinarts.webp",
+    badge: {
+      label: "Projeto profissional",
+      icon: LuBriefcaseBusiness,
+      iconColor: "hsl(var(--primary))",
+    },
   },
   {
-    ...placeholder,
-    category: "Backend",
-    icon: Database,
-    technologies: ["Python", "FastAPI", "PostgreSQL", "Docker"],
-  },
-  {
-    ...placeholder,
-    category: "Mobile",
-    icon: Smartphone,
-    technologies: ["React Native", "TypeScript", "Expo", "Firebase"],
-  },
-  {
-    ...placeholder,
-    category: "Backend",
-    icon: Cloud,
-    technologies: ["Java", "Spring Boot", "PostgreSQL", "Docker"],
-  },
-  {
-    ...placeholder,
+    title: "Verdantis",
+    description:
+      "Plataforma de rastreabilidade e gestão para o agronegócio, com dashboards e controle de lotes.",
     category: "Web",
     icon: Leaf,
-    technologies: ["React", "Node.js", "MySQL", "Tailwind"],
+    technologies: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+    liveUrl: "https://verdantis-webapp-vits.vercel.app/",
+    githubUrl: "https://github.com/caiolucasxz55/Verdantis-webapp",
+    image: "/projects/verdantis.webp",
+    badge: { label: "Projeto parceria com Oracle", icon: GrOracle, iconColor: "#C74634" },
   },
   {
-    ...placeholder,
+    title: "Fintech Expenses",
+    description:
+      "Gestão financeira full stack (NestJS + Next.js) com deploy automatizado na Azure via GitHub Actions.",
+    category: "Backend",
+    icon: Cloud,
+    technologies: ["NestJS", "Next.js", "Prisma", "Docker", "Azure", "GitHub Actions"],
+    githubUrl: "https://github.com/caiolucasxz55/fintech-expenses-challenge",
+    image: "/projects/fintech.webp",
+    badge: { label: "Deploy na Azure com CI/CD", icon: VscAzure, iconColor: "#0078D4" },
+  },
+  {
+    title: "Nova — Carreira com IA",
+    description:
+      "API Spring Boot com JWT e chatbot de carreira com IA, personalizado por metas e skills.",
+    category: "Backend",
+    icon: Bot,
+    technologies: ["Java", "Spring Boot", "Spring Security", "Oracle", "Perplexity", "Docker"],
+    githubUrl: "https://github.com/caiolucasxz55/Nova-Java",
+    image: "/projects/nova.webp",
+  },
+  {
+    title: "MoneyWay Bank",
+    description:
+      "API bancária em Spring Boot: contas, depósito, saque e Pix, com validações e BigDecimal.",
+    category: "Backend",
+    icon: Landmark,
+    technologies: ["Java", "Spring Boot", "Spring Data JPA", "H2"],
+    githubUrl: "https://github.com/caiolucasxz55/MoneyWayBank",
+    image: "/projects/moneyway.webp",
+  },
+  {
+    title: "Projeto MCP",
+    description: "Projeto em desenvolvimento. Mais detalhes em breve.",
     category: "Outros",
-    icon: BarChart3,
-    technologies: ["TypeScript", "Next.js", "Prisma", "PostgreSQL"],
+    icon: Plug,
+    technologies: [],
+    comingSoon: true,
+    badge: { label: "Em breve", icon: LuClock, iconColor: "hsl(var(--primary))" },
   },
 ]
 
@@ -155,14 +192,33 @@ function ProjectCard({ project }: { project: Project }) {
           <project.icon className="size-4" strokeWidth={1.75} />
         </span>
 
-        <ProjectLink
-          href={project.liveUrl}
-          label={`Abrir ${project.title}`}
-          className="absolute top-3 right-3 grid size-7 place-items-center rounded-md text-muted-foreground transition-colors"
-          hoverClassName="hover:text-foreground"
-        >
-          <ExternalLink className="size-4" strokeWidth={1.75} />
-        </ProjectLink>
+        {!project.comingSoon && (
+          <ProjectLink
+            href={project.liveUrl}
+            label={`Abrir ${project.title}`}
+            className={`absolute top-3 right-3 grid size-7 place-items-center rounded-md transition-colors ${
+              project.image
+                ? "bg-card/85 text-foreground shadow-sm backdrop-blur-sm"
+                : "text-muted-foreground"
+            }`}
+            hoverClassName={project.image ? "hover:text-primary" : "hover:text-foreground"}
+          >
+            <ExternalLink className="size-4" strokeWidth={1.75} />
+          </ProjectLink>
+        )}
+
+        {project.badge && (
+          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/90 px-2.5 py-1 text-[11px] font-medium text-foreground shadow-sm backdrop-blur-sm">
+            {project.badge.icon && (
+              <project.badge.icon
+                aria-hidden="true"
+                className="size-3.5 shrink-0"
+                style={project.badge.iconColor ? { color: project.badge.iconColor } : undefined}
+              />
+            )}
+            {project.badge.label}
+          </span>
+        )}
       </div>
 
       {/* Conteúdo */}
@@ -172,34 +228,56 @@ function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
-        <ul className="mt-4 flex flex-wrap gap-1.5">
-          {project.technologies.map((tech) => (
-            <li key={tech}>
-              <TechBadge name={tech} />
-            </li>
-          ))}
-        </ul>
+        {project.technologies.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-1.5">
+            {project.technologies.map((tech) => (
+              <li key={tech}>
+                <TechBadge name={tech} />
+              </li>
+            ))}
+          </ul>
+        )}
 
-        <div className="mt-auto flex items-center justify-between pt-6">
-          <ProjectLink
-            href={project.liveUrl}
-            className="group/link inline-flex items-center gap-1.5 rounded text-[13px] font-medium text-foreground transition-colors"
-            hoverClassName="hover:text-primary"
-          >
-            Ver projeto
-            <ArrowUpRight className="size-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-          </ProjectLink>
+        {project.comingSoon ? (
+          <div className="mt-auto flex items-center gap-2 pt-6 text-[13px] font-medium text-muted-foreground">
+            <span aria-hidden="true" className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary/60" />
+              <span className="relative inline-flex size-2 rounded-full bg-primary" />
+            </span>
+            Em desenvolvimento
+          </div>
+        ) : (
+          <div className="mt-auto flex items-center justify-between pt-6">
+            <ProjectLink
+              href={project.liveUrl}
+              className="group/link inline-flex items-center gap-1.5 rounded text-[13px] font-medium text-foreground transition-colors"
+              hoverClassName="hover:text-primary"
+            >
+              Ver projeto
+              <ArrowUpRight className="size-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+            </ProjectLink>
 
-          <ProjectLink
-            href={project.githubUrl}
-            label={`Código de ${project.title} no GitHub`}
-            className="inline-flex items-center gap-1.5 rounded text-[13px] font-medium text-foreground transition-colors"
-            hoverClassName="hover:text-primary"
-          >
-            <Github className="size-4" strokeWidth={1.75} />
-            Código
-          </ProjectLink>
-        </div>
+            {project.privateRepo ? (
+              <span
+                title="Repositório privado"
+                className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground"
+              >
+                <Lock className="size-3.5" strokeWidth={1.75} />
+                Código privado
+              </span>
+            ) : (
+              <ProjectLink
+                href={project.githubUrl}
+                label={`Código de ${project.title} no GitHub`}
+                className="inline-flex items-center gap-1.5 rounded text-[13px] font-medium text-foreground transition-colors"
+                hoverClassName="hover:text-primary"
+              >
+                <Github className="size-4" strokeWidth={1.75} />
+                Código
+              </ProjectLink>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )

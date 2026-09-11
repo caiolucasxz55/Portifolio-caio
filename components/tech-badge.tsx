@@ -1,18 +1,27 @@
 import type { IconType } from "react-icons"
 import { FaJava } from "react-icons/fa"
+import { GrOracle } from "react-icons/gr"
+import { VscAzure } from "react-icons/vsc"
 import {
   SiDocker,
   SiExpo,
   SiFastapi,
   SiFirebase,
+  SiGithubactions,
+  SiMercadopago,
   SiMysql,
+  SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
+  SiPerplexity,
   SiPostgresql,
   SiPrisma,
   SiPython,
   SiReact,
+  SiSpring,
+  SiShadcnui,
   SiSpringboot,
+  SiSpringsecurity,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si"
@@ -40,6 +49,15 @@ const techs: Record<string, TechMeta> = {
   "Node.js": { icon: SiNodedotjs, color: "#5FA04E" },
   MySQL: { icon: SiMysql, color: "#4479A1" },
   Prisma: { icon: SiPrisma },
+  "shadcn/ui": { icon: SiShadcnui },
+  NestJS: { icon: SiNestjs, color: "#E0234E" },
+  Azure: { icon: VscAzure, color: "#0078D4" },
+  "GitHub Actions": { icon: SiGithubactions, color: "#2088FF" },
+  "Mercado Pago": { icon: SiMercadopago, color: "#00B1EA" },
+  "Spring Security": { icon: SiSpringsecurity, color: "#6DB33F" },
+  "Spring Data JPA": { icon: SiSpring, color: "#6DB33F" },
+  Oracle: { icon: GrOracle, color: "#C74634" },
+  Perplexity: { icon: SiPerplexity, color: "#1FB8CD" },
 }
 
 /**
