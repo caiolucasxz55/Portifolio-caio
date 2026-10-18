@@ -5,27 +5,33 @@ import {
   Bot,
   Cloud,
   ExternalLink,
+  FileSpreadsheet,
   Github,
+  GraduationCap,
   Landmark,
   Leaf,
   Lock,
-  Plug,
+  ScanSearch,
+  Sparkles,
+  Star,
   Store,
+  TrainFront,
+  Workflow,
   type LucideIcon,
 } from "lucide-react"
 import Image from "next/image"
 import type { IconType } from "react-icons"
 import { GrOracle } from "react-icons/gr"
 import { VscAzure } from "react-icons/vsc"
-import { LuBriefcaseBusiness, LuClock } from "react-icons/lu"
+import { LuBriefcaseBusiness } from "react-icons/lu"
 import { useState, type ReactNode } from "react"
 import Reveal from "@/components/reveal"
 import SectionHeader from "@/components/section-header"
 import TechBadge from "@/components/tech-badge"
 
-const filters = ["Todos", "Web", "Backend", "Mobile", "Outros"] as const
+const filters = ["Todos", "Destaques", "IA & Machine Learning", "Web", "Backend", "Mobile", "Outros"] as const
 type Filter = (typeof filters)[number]
-type Category = Exclude<Filter, "Todos">
+type Category = Exclude<Filter, "Todos" | "Destaques">
 
 type Project = {
   title: string
@@ -45,6 +51,8 @@ type Project = {
   comingSoon?: boolean
   /** Selo de destaque sobre a capa, ex.: parceria com uma empresa. */
   badge?: { label: string; icon?: IconType; iconColor?: string }
+  /** Entra no filtro "Destaques" e ganha a estrela ao lado do título. */
+  featured?: boolean
 }
 
 // `image`, `liveUrl`, `githubUrl`, `privateRepo`, `comingSoon` e `badge` são opcionais.
@@ -64,6 +72,7 @@ const projects: Project[] = [
       icon: LuBriefcaseBusiness,
       iconColor: "hsl(var(--primary))",
     },
+    featured: true,
   },
   {
     title: "Verdantis",
@@ -76,6 +85,61 @@ const projects: Project[] = [
     githubUrl: "https://github.com/caiolucasxz55/Verdantis-webapp",
     image: "/projects/verdantis.webp",
     badge: { label: "Projeto parceria com Oracle", icon: GrOracle, iconColor: "#C74634" },
+    featured: true,
+  },
+  {
+    title: "SmartGuide",
+    description:
+      "Planejador de rotas do metrô de São Paulo com foco em acessibilidade, para pessoas com deficiência visual, auditiva e idosos.",
+    category: "Web",
+    icon: TrainFront,
+    technologies: ["React", "Node.js", "Java", "Python", "Oracle"],
+    liveUrl: "https://challenge-ccr-definitivo.vercel.app/",
+    githubUrl: "https://github.com/challengeFiap-tds/challenge-ccr-definitivo",
+    image: "/projects/smartguide.webp",
+    badge: { label: "Parceria FIAP + CCR", icon: GraduationCap, iconColor: "hsl(var(--primary))" },
+    featured: true,
+  },
+  {
+    title: "Falange",
+    description:
+      "Backend FastAPI com servidor MCP que expõe gestão de tarefas de time a uma IA, com papéis, motor de priorização e calibração de estimativas.",
+    category: "IA & Machine Learning",
+    icon: Workflow,
+    technologies: ["Python", "FastAPI", "PostgreSQL", "MCP", "Next.js", "Docker"],
+    githubUrl: "https://github.com/caiolucasxz55/falange",
+    featured: true,
+  },
+  {
+    title: "Bank Reconciliation & Anomaly Detection",
+    description:
+      "Concilia extratos bancários (OFX/CSV) com notas fiscais XML e ranqueia transações incomuns com Isolation Forest, com 99,7% de acerto na conciliação.",
+    category: "IA & Machine Learning",
+    icon: ScanSearch,
+    technologies: ["Python", "FastAPI", "scikit-learn", "PostgreSQL", "Next.js", "Docker"],
+    image: "/projects/bank-reconciliation.webp",
+    githubUrl: "https://github.com/caiolucasxz55/bank-reconciliation-anomaly-detection",
+    featured: true,
+  },
+  {
+    title: "Leads CNPJ",
+    description:
+      "Limpa, deduplica e enriquece planilhas de leads com dados públicos do CNPJ, evitando ligações para empresas duplicadas ou inativas, com envio direto ao HubSpot.",
+    category: "IA & Machine Learning",
+    icon: FileSpreadsheet,
+    technologies: ["Python", "Pandas", "HubSpot", "Docker"],
+    githubUrl: "https://github.com/caiolucasxz55/CRM-leads-cleaning",
+    featured: true,
+  },
+  {
+    title: "RAG Whitelabel",
+    description:
+      "Kit open source de RAG com citação de fontes e extração estruturada validada, trocando embeddings, vector store e LLM só por configuração (82% de hit rate@5).",
+    category: "IA & Machine Learning",
+    icon: Sparkles,
+    technologies: ["Python", "FastAPI", "Anthropic Claude", "PostgreSQL", "Docker"],
+    githubUrl: "https://github.com/caiolucasxz55/RAG-whitelabel",
+    featured: true,
   },
   {
     title: "Fintech Expenses",
@@ -107,15 +171,6 @@ const projects: Project[] = [
     technologies: ["Java", "Spring Boot", "Spring Data JPA", "H2"],
     githubUrl: "https://github.com/caiolucasxz55/MoneyWayBank",
     image: "/projects/moneyway.webp",
-  },
-  {
-    title: "Projeto MCP",
-    description: "Projeto em desenvolvimento. Mais detalhes em breve.",
-    category: "Outros",
-    icon: Plug,
-    technologies: [],
-    comingSoon: true,
-    badge: { label: "Em breve", icon: LuClock, iconColor: "hsl(var(--primary))" },
   },
 ]
 
@@ -173,7 +228,11 @@ function CoverPlaceholder() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="card-soft group flex h-full flex-col rounded-2xl p-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-primary/30">
+    <article
+      className={`card-soft group flex h-full flex-col rounded-2xl p-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-primary/30 ${
+        project.featured ? "ring-1 ring-primary/25" : ""
+      }`}
+    >
       {/* Capa */}
       <div className="relative aspect-[7/2] overflow-hidden rounded-xl bg-muted">
         {project.image ? (
@@ -223,7 +282,14 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* Conteúdo */}
       <div className="flex flex-1 flex-col px-1.5 pt-4 pb-1.5">
-        <h3 className="text-base font-bold tracking-tight text-foreground">{project.title}</h3>
+        <h3 className="flex items-center gap-1.5 text-base font-bold tracking-tight text-foreground">
+          {project.title}
+          {project.featured && (
+            <span title="Projeto em destaque" className="inline-flex shrink-0">
+              <Star aria-hidden="true" className="size-3.5 fill-amber-400 text-amber-400" />
+            </span>
+          )}
+        </h3>
         <p className="mt-2 max-w-[21rem] text-sm leading-relaxed text-muted-foreground text-pretty">
           {project.description}
         </p>
@@ -286,8 +352,11 @@ function ProjectCard({ project }: { project: Project }) {
 export default function ProjectsSection() {
   const [active, setActive] = useState<Filter>("Todos")
 
-  const visible =
-    active === "Todos" ? projects : projects.filter((project) => project.category === active)
+  const visible = projects.filter((project) => {
+    if (active === "Todos") return true
+    if (active === "Destaques") return project.featured
+    return project.category === active
+  })
 
   return (
     <section

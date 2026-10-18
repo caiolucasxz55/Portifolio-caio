@@ -3,21 +3,26 @@ import { FaJava } from "react-icons/fa"
 import { GrOracle } from "react-icons/gr"
 import { VscAzure } from "react-icons/vsc"
 import {
+  SiAnthropic,
   SiDocker,
   SiExpo,
   SiFastapi,
   SiFirebase,
   SiGithubactions,
+  SiHubspot,
   SiMercadopago,
+  SiModelcontextprotocol,
   SiMysql,
   SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
+  SiPandas,
   SiPerplexity,
   SiPostgresql,
   SiPrisma,
   SiPython,
   SiReact,
+  SiScikitlearn,
   SiSpring,
   SiShadcnui,
   SiSpringboot,
@@ -58,6 +63,11 @@ const techs: Record<string, TechMeta> = {
   "Spring Data JPA": { icon: SiSpring, color: "#6DB33F" },
   Oracle: { icon: GrOracle, color: "#C74634" },
   Perplexity: { icon: SiPerplexity, color: "#1FB8CD" },
+  "scikit-learn": { icon: SiScikitlearn, color: "#F7931E" },
+  Pandas: { icon: SiPandas, color: "#150458" },
+  MCP: { icon: SiModelcontextprotocol },
+  "Anthropic Claude": { icon: SiAnthropic, color: "#D97757" },
+  HubSpot: { icon: SiHubspot, color: "#FF7A59" },
 }
 
 /**
